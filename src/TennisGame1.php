@@ -23,15 +23,12 @@ class TennisGame1 implements TennisGame
 
     public function getScore(): string
     {
-        $score = '';
         if ($this->m_score1 === $this->m_score2) {
             $score = $this->getScoreIfMatched($this->m_score1);
         } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
             $score = $this->getScoreIfGamePoint();
         } else {
-            $score = $this->getScoreForPlayer($this->m_score1, $score);
-            $score .= '-';
-            $score = $this->getScoreForPlayer($this->m_score2, $score);
+            $score = $this->getScoreForPlayer($this->m_score1) .'-'. $this->getScoreForPlayer($this->m_score2);
         }
         return $score;
     }
@@ -72,8 +69,9 @@ class TennisGame1 implements TennisGame
      * @param string $score
      * @return string
      */
-    public function getScoreForPlayer(int $tempScore, string $score): string
+    public function getScoreForPlayer(int $tempScore): string
     {
+        $score='';
         switch ($tempScore) {
             case 0:
                 $score .= 'Love';
