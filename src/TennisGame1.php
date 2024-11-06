@@ -25,12 +25,7 @@ class TennisGame1 implements TennisGame
     {
         $score = '';
         if ($this->m_score1 === $this->m_score2) {
-            $score = match ($this->m_score1) {
-                0 => 'Love-All',
-                1 => 'Fifteen-All',
-                2 => 'Thirty-All',
-                default => 'Deuce',
-            };
+            $score = $this->getScoreIfMatched($this->m_score1);
         } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
             $minusResult = $this->m_score1 - $this->m_score2;
             if ($minusResult === 1) {
@@ -67,5 +62,18 @@ class TennisGame1 implements TennisGame
             }
         }
         return $score;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScoreIfMatched($m_score1): string
+    {
+        return match ($m_score1) {
+            0 => 'Love-All',
+            1 => 'Fifteen-All',
+            2 => 'Thirty-All',
+            default => 'Deuce',
+        };
     }
 }
