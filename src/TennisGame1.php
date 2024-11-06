@@ -29,28 +29,9 @@ class TennisGame1 implements TennisGame
         } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
             $score = $this->getScoreIfGamePoint();
         } else {
-            for ($i = 1; $i <=2; $i++) {
-                if ($i === 1) {
-                    $tempScore = $this->m_score1;
-                } else {
-                    $score .= '-';
-                    $tempScore = $this->m_score2;
-                }
-                switch ($tempScore) {
-                    case 0:
-                        $score .= 'Love';
-                        break;
-                    case 1:
-                        $score .= 'Fifteen';
-                        break;
-                    case 2:
-                        $score .= 'Thirty';
-                        break;
-                    case 3:
-                        $score .= 'Forty';
-                        break;
-                }
-            }
+            $score = $this->getScoreForPlayer($this->m_score1, $score);
+            $score .= '-';
+            $score = $this->getScoreForPlayer($this->m_score2, $score);
         }
         return $score;
     }
@@ -82,6 +63,30 @@ class TennisGame1 implements TennisGame
             $score = 'Win for player1';
         } else {
             $score = 'Win for player2';
+        }
+        return $score;
+    }
+
+    /**
+     * @param int $tempScore
+     * @param string $score
+     * @return string
+     */
+    public function getScoreForPlayer(int $tempScore, string $score): string
+    {
+        switch ($tempScore) {
+            case 0:
+                $score .= 'Love';
+                break;
+            case 1:
+                $score .= 'Fifteen';
+                break;
+            case 2:
+                $score .= 'Thirty';
+                break;
+            case 3:
+                $score .= 'Forty';
+                break;
         }
         return $score;
     }
