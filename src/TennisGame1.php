@@ -29,7 +29,7 @@ class TennisGame1 implements TennisGame
         } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
             $score = $this->getScoreIfGamePoint();
         } else {
-            for ($i = 1; $i < 3; $i++) {
+            for ($i = 1; $i <=2; $i++) {
                 if ($i === 1) {
                     $tempScore = $this->m_score1;
                 } else {
