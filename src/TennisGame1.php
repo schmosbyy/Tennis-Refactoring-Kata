@@ -36,7 +36,7 @@ class TennisGame1 implements TennisGame
     /**
      * @return string
      */
-    public function getScoreIfMatched($m_score1): string
+    public function getScoreIfMatched(int $m_score1): string
     {
         return match ($m_score1) {
             0 => 'Love-All',
@@ -52,16 +52,16 @@ class TennisGame1 implements TennisGame
     public function getScoreIfGamePoint(): string
     {
         $minusResult = $this->m_score1 - $this->m_score2;
-        if ($minusResult === 1) {
-            $score = 'Advantage player1';
-        } elseif ($minusResult === -1) {
-            $score = 'Advantage player2';
-        } elseif ($minusResult >= 2) {
-            $score = 'Win for player1';
-        } else {
-            $score = 'Win for player2';
+        $score ='';
+        if (abs($minusResult) === 1) {
+            $score = 'Advantage player';
+        } elseif (abs($minusResult) >= 2) {
+            $score = 'Win for player';
         }
-        return $score;
+        if($minusResult < 0) {
+            return $score.='2';
+        }
+        return $score.'1';
     }
 
     /**
@@ -74,16 +74,16 @@ class TennisGame1 implements TennisGame
         $score='';
         switch ($tempScore) {
             case 0:
-                $score .= 'Love';
+                $score = 'Love';
                 break;
             case 1:
-                $score .= 'Fifteen';
+                $score = 'Fifteen';
                 break;
             case 2:
-                $score .= 'Thirty';
+                $score = 'Thirty';
                 break;
             case 3:
-                $score .= 'Forty';
+                $score = 'Forty';
                 break;
         }
         return $score;
